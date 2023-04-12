@@ -80,8 +80,9 @@ end
 def menu_options
     puts "1. Add a new secret to the vault"
     puts "2. View a secret from the vault"
-    puts "3. Remove a secret from the vault"
-    puts "4. Exit"
+    puts "3. View all secrets in the vault"
+    puts "4. Remove a secret from the vault"
+    puts "5. Exit the program"
 end
 
 
@@ -134,7 +135,16 @@ def remove_secret_from_vault(secret_name)
     "
     end
 end
+#RETREVE ALL SECRETS FROM VAULT
+def retrieve_all_secrets
+    VAULT.each do |key, value|
+        puts "
 
+        #{key}: #{value}
+
+        "
+    end
+end
 
 #RETRIEVE SECRETS FROM VAULT
 def retrieve_secret_from_vault
@@ -169,9 +179,8 @@ end
 end
 
 def exit_program
-        puts "Exiting the program, stay safe..."
+        puts "Exiting the program. Do not worry, your secrets are safe with us."
 end
-
 
 def password_input
     gets.chomp
@@ -192,11 +201,14 @@ when "2"
     display_secrets(requested_secret, secret_content)
 
 when "3"
+    get_password_input
+    retrieve_all_secrets
+when "4"
     #user_password = password_input
     get_password_input
     secret_to_remove = remove_secret
     remove_secret_from_vault(secret_to_remove)
-when "4"
+when "5"
     exit_program
     exit
 else
