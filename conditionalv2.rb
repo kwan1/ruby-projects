@@ -19,40 +19,49 @@ end
 #verify email and password
 def get_email_input(attempt = 1)
     
-    puts (attempt > 1 ? "Invalid email, you have #{5 - attempt} attempts left, please try again: " : "Please enter your email: ")   
+    puts (attempt > 1 ? "Invalid email, please try again. Note: you have #{4 - attempt} attempts left: " : "Please enter your email: ")   
     user_email = gets.chomp
 
-        if attempt == 4
+        if attempt == 3
+            if user_email == EMAIL
+                return true if user_email == EMAIL
+            else
             puts "
             
-            You have exceeded the maximum number of attempts, exiting the program...
+            You have exceeded the maximum number of attempts.
+            Attempts counter: #{3 - attempt}
+            Exiting the program...
             
             "
             exit_program
             exit
+            end
         end
     return true if user_email == EMAIL
-    return false if attempt == 4
+    return false if attempt == 3
     get_email_input(attempt + 1)
    
     end
 
 
 def get_password_input(attempt = 1)
-    
-    puts (attempt > 1 ? "Invalid password, #{5 - attempt} attempts left, try again: " : "Please enter your passowrd: ")
+    puts (attempt > 1 ? "Invalid password, please try again. Note: you have #{4 - attempt} attempts left: " : "Please enter your password: ")
     user_password = gets.chomp
-    if attempt == 4
+    if attempt == 3
+        if user_password == PASSWORD
+            return true if user_password == PASSWORD
+        else
         puts "
 
-        You have exceeded the maximum number of attempts, exiting the program...
+        You have #{3 - attempt} attempts, exiting the program...
         
         "
         exit_program
         exit
+        end
     end
     return true if user_password == PASSWORD
-    return false if attempt ==4
+    return false if attempt ==3
     get_password_input(attempt + 1)
 end
 
@@ -64,7 +73,7 @@ def verify_password_input(user_password)
 end
 
 def greet_user
-    puts "Login successful, welcome #{NAME}!"
+    puts "Login successful, welcome #{NAME.capitalize!}!"
     puts "What would you like to do today?"       
 end
 
@@ -175,7 +184,7 @@ when "1"
     new_secret = set_new_secret
     set_new_secret_for(new_secret)
 when "2"
-    puts "Please re-enter your password to view your secrets below"
+    puts "Re-enter your password to view your secrets below"
     #user_password = password_input
     get_password_input
     requested_secret = retrieve_secret_from_vault
