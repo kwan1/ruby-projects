@@ -108,7 +108,8 @@ def set_new_secret_for(secret_content)
     
     "
     new_content = gets.chomp
-    VAULT[secret_content.to_sym][:content] = new_content 
+    VAULT[secret_content.to_sym][:content] = new_content
+    puts "Secret has been added to the vault."
 end
 
 #REMOVE SECRETS FROM HASH
@@ -135,6 +136,7 @@ def remove_secret_from_vault(secret_name)
     "
     end
 end
+
 #RETREVE ALL SECRETS FROM VAULT
 def retrieve_all_secrets
     VAULT.each do |key, value|
@@ -211,6 +213,9 @@ when "4"
 when "5"
     exit_program
     exit
+
+when "99"
+
 else
         puts "Invalid selection, exiting the program to protect your secrets."
         exit
