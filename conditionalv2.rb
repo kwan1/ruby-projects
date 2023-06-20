@@ -1,8 +1,4 @@
-EMAIL = "abc@email.com"
-NAME = "abc"
-PASSWORD = "1234"
-VAULT = {sky: {content: "the sky is blue"}}
-#sky = title and content is content of secrets.
+require_relative 'secrets.rb'
 
 
 #Define methods
@@ -18,8 +14,8 @@ end
 
 #verify email and password
 def get_email_input(attempt = 1)
-    
-    puts (attempt > 1 ? "Invalid email, please try again. Note: you have #{4 - attempt} attempts left: " : "Please enter your email: ")   
+
+    puts (attempt > 1 ? "Invalid email, please try again. Note: you have #{4 - attempt} attempts left: " : "Please enter your email: ")
     user_email = gets.chomp
 
         if attempt == 3
@@ -27,11 +23,11 @@ def get_email_input(attempt = 1)
                 return true if user_email == EMAIL
             else
             puts "
-            
+
             You have exceeded the maximum number of attempts.
             Attempts counter: #{3 - attempt}
             Exiting the program...
-            
+
             "
             exit_program
             exit
@@ -40,7 +36,7 @@ def get_email_input(attempt = 1)
     return true if user_email == EMAIL
     return false if attempt == 3
     get_email_input(attempt + 1)
-   
+
     end
 
 
@@ -54,7 +50,7 @@ def get_password_input(attempt = 1)
         puts "
 
         You have #{3 - attempt} attempts, exiting the program...
-        
+
         "
         exit_program
         exit
@@ -74,7 +70,7 @@ end
 
 def greet_user
     puts "Login successful, welcome #{NAME.capitalize!}!"
-    puts "What would you like to do today?"       
+    puts "What would you like to do today?"
 end
 
 def menu_options
@@ -103,9 +99,9 @@ end
 
 def set_new_secret_for(secret_content)
     print "
-    
-    Enter your secret content, make sure there's no one around to look at it: 
-    
+
+    Enter your secret content, make sure there's no one around to look at it:
+
     "
     new_content = gets.chomp
     VAULT[secret_content.to_sym][:content] = new_content
@@ -115,7 +111,7 @@ end
 #REMOVE SECRETS FROM HASH
 def remove_secret
     puts "
-    
+
     Please enter the title of secret you would like to remove from the vault: "
     gets.chomp
 end
@@ -125,7 +121,7 @@ def remove_secret_from_vault(secret_name)
         puts "
 
         No such secret in the vault.
-        
+
         "
     else
     VAULT.delete(secret_name.to_sym)
@@ -163,12 +159,12 @@ def display_secrets(secret_name, secret_content)
         puts "
 
         No such secret in the vault.
-        
+
         "
-    
+
 else
     puts "
-    
+
     Here is the secret you've asked for: #{secret_name}"
     secret_content.each do |key, value|
         puts "
